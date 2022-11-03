@@ -9,6 +9,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int count = 0;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +19,25 @@ class _MainScreenState extends State<MainScreen> {
         centerTitle: true,
       ),
       body: Center(
-        child: Text(
-          '$count',
-          style: const TextStyle(fontSize: 50),
+        child: InkWell(
+          onTap: () async{
+           setState(() {
+             isLoading = true;
+           });
+
+            await Future.delayed(const Duration(seconds: 1));
+
+            setState(() {
+              count++;
+              isLoading = false;
+            });
+          },
+          child: isLoading ?
+          const Center(child: CircularProgressIndicator(),)
+          : Text(
+            '$count',
+            style: const TextStyle(fontSize: 50),
+          ),
         ),
       ),
     );
