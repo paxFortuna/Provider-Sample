@@ -24,16 +24,8 @@ class _MainScreenState extends State<MainScreen> {
       body: Center(
         child: InkWell(
           onTap: () async{
-           setState(() {
-             viewModel.isLoading = true;
-           });
+             await viewModel.countUp();
 
-            await Future.delayed(const Duration(seconds: 1));
-
-            setState(() {
-              viewModel.countUp();
-              viewModel.isLoading = false;
-            });
           },
           child: viewModel.isLoading ?
           const Center(child: CircularProgressIndicator(),)
