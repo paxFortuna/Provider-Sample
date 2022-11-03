@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider_sample/presentation/main/main_view_model.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -8,8 +9,8 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int count = 0;
-  bool isLoading = false;
+
+  final viewModel = MainViewModel();
 
   @override
   Widget build(BuildContext context) {
@@ -22,20 +23,20 @@ class _MainScreenState extends State<MainScreen> {
         child: InkWell(
           onTap: () async{
            setState(() {
-             isLoading = true;
+             viewModel.isLoading = true;
            });
 
             await Future.delayed(const Duration(seconds: 1));
 
             setState(() {
-              count++;
-              isLoading = false;
+              viewModel.countUp();
+              viewModel.isLoading = false;
             });
           },
-          child: isLoading ?
+          child: viewModel.isLoading ?
           const Center(child: CircularProgressIndicator(),)
           : Text(
-            '$count',
+            '${viewModel.count}',
             style: const TextStyle(fontSize: 50),
           ),
         ),
