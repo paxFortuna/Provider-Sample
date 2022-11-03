@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:provider_sample/presentation/main/main_view_model.dart';
 
 class MainScreen extends StatefulWidget {
@@ -10,10 +11,11 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
 
-  final viewModel = MainViewModel();
+  // final viewModel = MainViewModel();
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<MainViewModel>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Provider Sample'),
